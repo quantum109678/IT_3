@@ -11,7 +11,7 @@ class BinaryHeap:
 			q=p//2
 			if q==0:
 				break
-			if self.A[p]>self.A[q]:
+			if self.A[p]<self.A[q]:
 				tem=self.A[p]
 				self.A[p]=self.A[q]
 				self.A[q]=tem
