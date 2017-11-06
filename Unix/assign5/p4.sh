@@ -1,5 +1,7 @@
-sleep 15
-echo "Hello"
+sleep 5 &
+echo "Sleep process"
 
 
-kill this
+
+kill $!
+echo "Sleep process killed"
