@@ -1,3 +1,52 @@
+class MinHeap:
+
+	def __init__(self):
+		self.A=[]
+		self.A.append(-20000)
+
+	def heapify(self,i):
+		n=len(self.A)-1
+		#print(n)
+		l=2*i
+		#print(l)
+		r=2*i+1
+		#print(r)
+		largest=i
+		if l<=n:
+			if self.A[l].dis<self.A[i].dis:
+				largest=l
+		if r<=n:
+			if self.A[r].dis<self.A[largest].dis:
+				largest=r
+		if largest!=i:
+			tmp=self.A[largest]
+			self.A[largest]=self.A[i]
+			self.A[i]=tmp
+			self.heapify(largest)
+
+
+	def insert(self,v):
+		self.A.append(v)
+		for i in range(len(self.A)//2,0,-1):
+			self.heapify(i)
+
+
+	def minimum(self):
+		return self.A[1]
+
+	def updatePrio(self,u):
+		
+
+	def extractmmin(self):
+		n=len(self.A)
+		r=self.A[1]
+		s=self.A[n-1]
+		self.A[1]=s
+		self.A[n-1]=r
+		self.A.pop()
+		for i in range (len(self.A)//2,0,-1):
+			self.heapify(i)
+		return r
 class Vertex:
 
 
