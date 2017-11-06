@@ -1,4 +1,4 @@
 echo "PID of current user:"
-echo "$(ps -u $USER)"
+ps u
 echo "Current shell PID:"
-	echo $$
+ps | sed '2q'
