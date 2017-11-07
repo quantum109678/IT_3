@@ -99,12 +99,12 @@ def main():
 			N2.next=tmp
 			L[v1].next=N2
 			
-		if L[v2].next==None:
+		"""if L[v2].next==None:
 			L[v2].next=N1
 		else:
 			tmp=L[v2].next
 			N1.next=tmp
-			L[v2].next=N1
+			L[v2].next=N1"""
 	s=int(input("Enter the source vertex:"))
 	DSP(L,E,s)
 	for i in range(len(L)):
