@@ -8,7 +8,7 @@ class BinaryHeap:
 			self.heapify(n,i)
 
 	def heapify(self,n,i):
-		n=len(self.A)-1
+		
 		#print(n)
 		l=2*i
 		#print(l)
@@ -25,7 +25,7 @@ class BinaryHeap:
 			tmp=self.A[largest]
 			self.A[largest]=self.A[i]
 			self.A[i]=tmp
-			self.heapify(len(self.A),largest)
+			self.heapify(n,largest)
 
 
 	def printHeap(self):
@@ -46,16 +46,19 @@ class BinaryHeap:
 			self.heapify(n,i)
 		return r
 
+	
+
+
 def main():
 	n=int(input("Enter number of elements"))
 	D=[0 for i in range(n)]
 	for i in range(n):
 		D[i]=int(input("Enter the element"))
 	H=BinaryHeap(n,D)
-	H.printHeap()
-	m=H.maximum()
-	print(m)
-	m2=H.extractmax()
+
+	for i in range(n-1,1,-1):
+		H.A[i],H.A[1]=H.A[1],H.A[i]
+		H.heapify(i,1)
 	H.printHeap()
 
 

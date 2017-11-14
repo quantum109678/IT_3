@@ -35,10 +35,17 @@ class MinHeap:
 		return self.A[1]
 
 	def updatePrio(self,u):
+		for i in range(len(self.A)):
+			if self.A[i]==u:
+				self.A[i].dis=u.dis
+		for i in range(len(self.A)//2,0,-1):
+			self.heapify(i)
 		
 
-	def extractmmin(self):
+	def extractMin(self):
 		n=len(self.A)
+		if n==1:
+			return self.A.pop()
 		r=self.A[1]
 		s=self.A[n-1]
 		self.A[1]=s
@@ -103,19 +110,27 @@ def main():
 			L[v2].next=N1
 	s=int(input("Enter the source vertex:"))
 	DSP(L,E,s)
+	for i in range(len(L)):
+		print(i,L[i].dis)
 
 def DSP(L,E,s):
 	L[s].dis=0
 	H=MinHeap()
 	for i in range(len(L)):
 		H.insert(L[i])
-	while len(H)!=0:
+	while len(H.A)!=1:
 		w=H.extractMin()
-		tmp=L[w].next
+		print("call")
+		tmp=w.next
 		while tmp!=None:
 			for i in range(len(E)):
 				if (E[i].e1==w.key and E[i].e2==tmp.val) or (E[i].e2==w.key and E[i].e1==tmp.val):
 					cd=E[i].wei
 			if w.dis+cd<L[tmp.val].dis:
-				L[tmp.val]=w.dis+cd
+				L[tmp.val].dis=w.dis+cd
 			H.updatePrio(L[tmp.val])
+			tmp=tmp.next
+
+
+if __name__ == '__main__':
+	main()

@@ -16,7 +16,7 @@ class Trie:
         for i in range(len(d)):
             index=ord(d[i])-ord('a')
             if temp.children[index] is None :
-                temp.children[index]=d[i]
+                #temp.children[index]=d[i]
                 
                 temp.children[index]=self.getNode()
                 temp=temp.children[index]
