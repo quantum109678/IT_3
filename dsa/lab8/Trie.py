@@ -23,6 +23,7 @@ class Trie:
             else:
                 
                 temp=temp.children[index]
+        temp[index]=5
         temp.end=True
         temp.count=temp.count+1
 
