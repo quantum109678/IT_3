@@ -1,3 +1,4 @@
+
 import json
 import requests
 import re
@@ -7,6 +8,7 @@ class Node:
 
     def __init__(self):
         self.val=None
+        self.obj=None
         self.next=None
 
 class TrieNode:
@@ -22,7 +24,6 @@ class TrieNode:
         return self.children[index]
 
     
-
 
 
 class Trie:
@@ -41,6 +42,7 @@ class Trie:
         return (ord(ch) - ord('a'))
 
     def insert(self, key,det):
+       
         
 
 
@@ -65,11 +67,11 @@ class Trie:
         tmp.EOW=True
         
 
-        if curr.next==None:
-            curr.next=det
+        if curr.obj==None:
+            curr.obj=det
         else:
-            det.next=curr.next
-            curr.next=det
+            det.next=curr.obj
+            curr.obj=det
         
 
 
@@ -99,7 +101,7 @@ class Trie:
                 curr=tmp.__getitem__(index)
                 
 
-        curr=curr.next
+        curr=curr.obj
     
         print("SONG:",curr.ori_song,"\nARTIST:",curr.ori_artist,"\nDURATION:",curr.duration,"seconds\nURL:",curr.url)
         print()
@@ -109,7 +111,6 @@ class Trie:
 
         tmp= self.root
         length = len(key)
-        print("len",length)
         for i in range(length):
             index = self._charToIndex(key[i])
 
@@ -127,7 +128,7 @@ class Trie:
             if i==len(key)-2:
                 curr=tmp.__getitem__(index)
 
-        curr=curr.next
+        curr=curr.obj
 
         while curr!=None:
             print("SONG:", curr.ori_song, "\nARTIST:",curr.ori_artist, "\nDURATION:",
@@ -151,22 +152,23 @@ class song_obj:
 # driver function
 def main():
     t=Trie()
-    response = requests.get("http://ws.audioscrobbler.com/2.0/?method=tag.gettoptracks&tag=disco&api_key=14bdca878b6b2ad0a9ba5278a32a1e14&format=json&limit=400")
+    response = requests.get("http://ws.audioscrobbler.com/2.0/?method=tag.gettoptracks&tag=disco&api_key=14bdca878b6b2ad0a9ba5278a32a1e14&format=json&limit=1000")
     data = response.json()
-    for i in range (400):
-        if i!=296 and i!=9:
-            s=data["tracks"]["track"][i]["name"]
-            os=data["tracks"]["track"][i]["name"]
-            ar=data["tracks"]["track"][i]["artist"]["name"]
-            oriar=data["tracks"]["track"][i]["artist"]["name"]
-            du=data["tracks"]["track"][i]["duration"]
-            url=data["tracks"]["track"][i]["url"]
-            s=s.replace(" ","")
-            ar=ar.replace(" ","")
-            s=s.lower()
-            s=re.sub("[^a-z]+", "",s)
-            ar=ar.lower()
-            ar=re.sub("[^a-z]+", "",ar)
+    for i in range (1000):
+        
+        s=data["tracks"]["track"][i]["name"]
+        os=data["tracks"]["track"][i]["name"]
+        ar=data["tracks"]["track"][i]["artist"]["name"]
+        oriar=data["tracks"]["track"][i]["artist"]["name"]
+        du=data["tracks"]["track"][i]["duration"]
+        url=data["tracks"]["track"][i]["url"]
+        s=s.replace(" ","")
+        ar=ar.replace(" ","")
+        s=s.lower()
+        s=re.sub("[^a-z]+", "",s)
+        ar=ar.lower()
+        ar=re.sub("[^a-z]+", "",ar)
+        if len(s)>=2 and len(ar)>=2:
             temp=song_obj(s,ar,os,oriar,du,url)
             t.insert(temp.song_key,temp)
             t.insert(temp.artist_key,temp)
