@@ -30,18 +30,22 @@ for i in range(3):
 		n=int(input(j))
 		womenpref[i][n]=j
 
-for i in range(3):
+flag=1
+
+while flag==1:
+	for i in range(3):
+		if FM[i]==1:
+			flag=1
+			break
+		else:
+			flag=0
 	if FM[i]==1 and PC[i]<3:
-		print(i,end=' ')
-		print(PC[i])
 		if Ho[menpref[i][PC[i]]]==-1:
 			Ho[menpref[i][PC[i]]]=i
-			#print(Ho[menpref[i][PC[i]]])
 			Wo[i]=menpref[i][PC[i]]
 			PC[i]=PC[i]+1
 			FM[i]=0
 		elif womenpref[menpref[i][PC[i]]][i]< womenpref[menpref[i][PC[i]]][Ho[menpref[i][PC[i]]]]:
-			#print(womenpref[menpref[i][PC[i]]][Ho[menpref[i][PC[i]]]])
 			FM[Ho[menpref[i][PC[i]]]]=1
 			Ho[menpref[i][PC[i]]]=i
 			Wo[i]=menpref[i][PC[i]]
@@ -49,7 +53,6 @@ for i in range(3):
 			FM[i]=0
 		else:
 			PC[i]=PC[i]+1
-	print()
 
 for i in range(3):
 	print(Ho[i], end=' ')
