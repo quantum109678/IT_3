@@ -177,8 +177,9 @@ def main():
         ch=int(input("Enter your choice:"))
         if ch==1:
             song=input("Enter song name:")
-            song = song.replace(" ", "")
+            
             song = song.lower()
+            song=re.sub("[^a-z]+", "",song)
             t.song_search(song)
         elif ch==2:
             art=input("Enter artist name:")
